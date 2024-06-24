@@ -1,7 +1,14 @@
 'use client';
+
+import * as Sentry from '@sentry/nextjs';
+
 export default function Route3() {
   const throwError = () => {
-    throw Error('Dummy error');
+    try {
+      throw Error('Dummy error');
+    } catch (error) {
+      Sentry.captureException('Dummy error');
+    }
   };
   return (
     <>
